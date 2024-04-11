@@ -1,0 +1,84 @@
+
+spring:
+  shardingsphere:
+    mode:
+      type: Standalone
+      repository:
+        type: JDBC
+    datasource:
+      names: master,ds0,ds1,dss0,dss1
+      master:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/master?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+        username: root
+        password: root
+      ds0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/ds_0?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+        username: root
+        password: root
+      ds1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/ds_1?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+        username: root
+        password: root
+      dss0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/ds_2?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+        username: root
+        password: root
+      dss1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/ds_3?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+        username: root
+        password: root
+
+
+    rules:
+      sharding:
+
+        tables:
+          user:
+            actual-data-nodes: ds$->{0..1}.user,dss$->{0..1}.user
+            key-generate-strategy:
+              column: id
+              key-generator-name: snowflake
+          suilang:
+            actual-data-nodes: master.suilang
+            database-strategy:
+              none:
+                sharding-column: id
+            key-generate-strategy:
+              column: id
+              key-generator-name: snowflake
+        broadcast-tables: sys_dic
+        default-database-strategy:
+          standard:
+            sharding-column: id
+            sharding-algorithm-name: database-precise-algorithm
+#          hint:
+#            sharding-algorithm-name: database-hint-algorithm
+        sharding-algorithms:
+          database-precise-algorithm:
+            type: CLASS_BASED
+            props:
+              strategy: STANDARD
+              algorithmClassName: com.cxytiandi.sharding.algorithm.CustomPreciseShardingAlgorithm
+          database-hint-algorithm:
+            type: CLASS_BASED
+            props:
+              strategy: HINT
+              algorithmClassName: com.cxytiandi.sharding.algorithm.CustomHintShardingAlgorithm
+        key-generators:
+          snowflake:
+            type: SNOWFLAKE
+    props:
+      sql-show: true
+
+
+

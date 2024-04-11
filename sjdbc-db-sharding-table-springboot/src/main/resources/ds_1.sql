@@ -1,0 +1,91 @@
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : localhost
+ Source Server Type    : MySQL
+ Source Server Version : 80025
+ Source Host           : localhost:3306
+ Source Schema         : ds_1
+
+ Target Server Type    : MySQL
+ Target Server Version : 80025
+ File Encoding         : 65001
+
+ Date: 11/04/2024 09:06:01
+*/
+CREATE DATABASE `ds_1` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for loudong
+-- ----------------------------
+DROP TABLE IF EXISTS `ds_1`.`loudong`;
+CREATE TABLE `ds_1`.`loudong`  (
+  `id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `city` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `region` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `ld_num` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `unit_num` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for sys_dic
+-- ----------------------------
+DROP TABLE IF EXISTS `ds_1`.`sys_dic`;
+CREATE TABLE `ds_1`.`sys_dic`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `type` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `value` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1427173379 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `ds_1`.`user`;
+CREATE TABLE `ds_1`.`user`  (
+  `id` bigint(0) NOT NULL,
+  `city` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for user_0
+-- ----------------------------
+DROP TABLE IF EXISTS `ds_1`.`user_0`;
+CREATE TABLE `ds_1`.`user_0`  (
+  `id` bigint(0) NOT NULL,
+  `city` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for user_1
+-- ----------------------------
+DROP TABLE IF EXISTS `ds_1`.`user_1`;
+CREATE TABLE `ds_1`.`user_1`  (
+  `id` bigint(0) NOT NULL,
+  `city` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for user_2
+-- ----------------------------
+DROP TABLE IF EXISTS `ds_1`.`user_2`;
+CREATE TABLE `ds_1`.`user_2`  (
+  `id` bigint(0) NOT NULL,
+  `city` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+SET FOREIGN_KEY_CHECKS = 1;
