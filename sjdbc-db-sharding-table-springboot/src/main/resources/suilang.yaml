@@ -1,0 +1,73 @@
+mode:
+  type: Standalone
+  repository:
+    type: JDBC
+
+dataSources:
+  master:
+    dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/master?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+  ds0:
+    dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ds_0?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+  ds1:
+    dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ds_1?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+  dss0:
+    dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ds_2?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+  dss1:
+    dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ds_3?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+
+
+rules:
+  - !SHARDING
+    tables:
+      user:
+        actualDataNodes: ds$->{0..1}.user,dss$->{0..1}.user
+      suilang:
+        actualDataNodes: master.suilang
+        databaseStrategy:
+          none:
+    broadcastTables:
+      - sys_dic
+    defaultDatabaseStrategy:
+      standard:
+        shardingColumn: id
+        shardingAlgorithmName: database-precise-algorithm
+    defaultKeyGenerateStrategy:
+      column: id
+      keyGeneratorName: snowflake
+    shardingAlgorithms:
+      database-precise-algorithm:
+        type: CLASS_BASED
+        props:
+          strategy: STANDARD
+          algorithmClassName: com.cxytiandi.sharding.algorithm.CustomPreciseShardingAlgorithm
+      database-hint-algorithm:
+        type: CLASS_BASED
+        props:
+          strategy: HINT
+          algorithmClassName: com.cxytiandi.sharding.algorithm.CustomHintShardingAlgorithm
+    keyGenerators:
+      snowflake:
+        type: SNOWFLAKE
+
+props:
+  sql-show: true

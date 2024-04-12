@@ -52,7 +52,7 @@ spring:
             actual-data-nodes: master.suilang
             database-strategy:
               none:
-                sharding-column: id
+                any:
             key-generate-strategy:
               column: id
               key-generator-name: snowflake

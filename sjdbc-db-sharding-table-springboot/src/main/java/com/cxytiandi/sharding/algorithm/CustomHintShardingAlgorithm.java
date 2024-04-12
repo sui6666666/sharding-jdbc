@@ -25,10 +25,6 @@ public class CustomHintShardingAlgorithm implements HintShardingAlgorithm<String
 		return values;
 	}
 
-	@Override
-	public Properties getProps() {
-		return null;
-	}
 
 	@Override
 	public void init(Properties properties) {

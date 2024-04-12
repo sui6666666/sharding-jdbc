@@ -55,10 +55,6 @@ public class CustomPreciseShardingAlgorithm implements StandardShardingAlgorithm
 		throw new IllegalArgumentException();
 	}
 
-	@Override
-	public Properties getProps() {
-		return null;
-	}
 
 	@Override
 	public void init(Properties properties) {
